@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
+    <link href="../css/project2.css" rel="stylesheet" />
+
+    <script src="../../Scripts/jquery-3.1.1.js"></script>
+    <script src="../../Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js"></script>
+
+    <script src="../js/namespace.js"></script>
+    <script src="../js/dataService.js"></script>
+    <script src="../js/movieDetails.js"></script>
+
+</head>
+<body class="myDiv">
+    <div class="bg"></div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="home.html">
+                    <i class="fa fa-television" aria-hidden="true"></i>&nbsp;<strong>TV</strong> Guide
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation"><a href="discover.html">Discover</a></li>
+                    <li role="presentation" class="active"><a href="movies.html">Movies</a></li>
+                    <li role="presentation"><a href="tvShows.html">TV Shows</a></li>
+                </ul>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+        <div class="container">
+            
+                <div class="row" style="padding-top:15px">
+                    <div class="col-md-4">
+                        <img data-bind="attr:{src:constructPosterImageUrl(details.poster_path), alt:details.original_title}" />
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-md-12">
+                            <h2 data-bind="text:details.title"></h2>
+                        </div>
+                        <div>
+                            <!--<div class="col-md-6">user score : <span data-bind="text:details.vote_average"></span></div>-->
+                            <div class="col-md-6">
+                                <div id="ratingDiv">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6"><a href="#" class="pull-right" data-bind="click:playTrailer"><i class="fa fa-play fa-lg" aria-hidden="true"></i> Play Trailer</a></div>
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Overview</h4>
+                            <p data-bind="text:details.overview"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Featured Crew</h4>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <p><strong data-bind="text:crew[0].name"></strong></p>
+                                    <p data-bind="text:crew[0].job"></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><strong data-bind="text:crew[1].name"></strong></p>
+                                    <p data-bind="text:crew[1].job"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="page-header">
+                        <h3 class="">Top Billed Cast</h3>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div data-bind="foreach:cast">
+                            <div class="col-md-2">
+                                <div class="thumbnail profile-thumbnail-height">
+                                    <img class="img-responsive" data-bind="attr:{src:$parent.constructProfileImageUrl($data.profile_path),alt:$data.name}" />
+                                    <div class="caption">
+                                        <h3 data-bind="text:$data.name"></h3>
+                                        <p data-bind="text:$data.character"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="page-header"><h3 class="">Movie Data</h3></div>
+
+                    <div class="col-md-4">
+                        <div>
+                            <h4>Status</h4><p data-bind="text:details.status"></p>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Runtime</h4><p data-bind="text:details.runtime+' mins'"></p>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Revenue</h4><p data-bind="text:'$'+formatCurrency(details.revenue)"></p>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Release Date</h4><p data-bind="text:details.release_date"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h4>Original Language</h4><p data-bind="text:details.original_language.toUpperCase()"></p>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Budget</h4><p data-bind="text:'$'+formatCurrency(details.budget)"></p>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Homepage</h4><a target="_blank" data-bind="text:details.homepage, attr:{href:details.homepage}"></a>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>IMDB page</h4><a target="_blank" data-bind="text:'http://www.imdb.com/title/'+details.imdb_id, attr:{href:'http://www.imdb.com/title/'+details.imdb_id}"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h4>Genres</h4>
+                            <div data-bind="foreach:details.genres">
+                                <span class="label label-primary" data-bind="text:name"></span>&nbsp;
+                            </div>
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Keywords</h4>
+                            <div data-bind="foreach:keywords">
+                                <span class="label label-info" data-bind="text:name"></span>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" data-bind="if:movieReviews[0]">
+                    <div class="page-header">
+                        <h3 class="">
+                            Reviews
+                        </h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><span data-bind="text:'A review by '+movieReviews[0].author"></span></h4>
+                                <span data-bind="text:movieReviews[0].author"></span>
+                            </div>
+                            <div class="panel-body">
+                                <span data-bind="text:movieReviews[0].content"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" data-bind="if: movieReviews[1]">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><span data-bind="text:'A review by '+movieReviews[1].author"></span></h4>
+                                <span data-bind="text:movieReviews[1].author"></span>
+                            </div>
+                            <div class="panel-body">
+                                <span data-bind="text:movieReviews[1].content"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="page-header">
+                        <h3 class="">
+                            Similar Movies
+                        </h3>
+                    </div>
+                </div>
+                <div class="row" data-bind="foreach:similarMovies">
+                    <div class="col-md-2 thumbnail similar-thumbnail-height">
+                        <a href="#" data-bind="click:$parent.redirectToAnotherMovie">
+                            <img data-bind="attr:{src:$parent.constructImageUrlForSimilarMovies(poster_path), alt:title}">
+                        </a>
+                        <p data-bind="text:title">
+
+                        </p><span class="" data-bind="text:vote_average"></span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <br /><br />
+                <br />
+            
+    </div>
+    <div id="playTrailerDialog" title="Play Trailer" style="display:none">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="trailerFrame" class="embed-responsive-item"></iframe>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+    <link href="../css/project2.css" rel="stylesheet" />
+
+    <script src="../../Scripts/jquery-3.1.1.js"></script>
+    <script src="../../Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../js/namespace.js"></script>
+    <script src="../js/dataService.js"></script>
+    <script src="../js/discover.js"></script>
+</head>
+<body>
+    <!--<div class="container">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="home.html">Home</a></li>
+            <li role="presentation" class="active disabled"><a href="#">Discover</a></li>
+            <li role="presentation"><a href="movies.html">Movies</a></li>
+            <li role="presentation"><a href="tvShows.html">TV Shows</a></li>
+        </ul>
+    </div>-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="home.html">
+                    <i class="fa fa-television" aria-hidden="true"></i>&nbsp;<strong>TV</strong> Guide
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation" class="active"><a href="discover.html">Discover</a></li>
+                    <li role="presentation"><a href="movies.html">Movies</a></li>
+                    <li role="presentation"><a href="tvShows.html">TV Shows</a></li>
+                </ul>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>
+                    Discover New Movies &amp; TV Shows
+                </h2>
+            </div>
+            <div class="col-md-4">
+                <!--<ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active" id="movieTab"><a href="#" data-bind="click:selectMovieListener">Movies</a></li>
+                    <li role="presentation" id="tvTab"><a href="#" data-bind="click:selectTvShowListener">TV Shows</a></li>
+                </ul>-->
+                <div id="tab" class="pull-right">
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active" id="movieTab"><a href="#" data-bind="click:selectMovieListener">Movies</a></li>
+                        <li role="presentation" id="tvTab"><a href="#" data-bind="click:selectTvShowListener">TV Shows</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row well">
+            
+            <div class="col-md-3">
+                <div><span>Year</span></div>
+                <select class="form-control" data-bind="options:yearOptions, value:year, optionsCaption: 'Select'"></select>
+            </div>
+            <div class="col-md-3">
+                <div><span>Sort By</span></div>
+                <select class="form-control" data-bind="options:sortByOptions, value:sortBy, optionsText:'value',optionsValue:'key', optionsCaption: 'Select'"></select>
+            </div>
+            <div class="col-md-3">
+                <div><span>Genres</span></div>
+                <select class="form-control" multiple size="3" data-bind="options:genresOptions, selectedOptions:genres, optionsText:'name',optionsValue:'id'"></select>
+            </div>
+            <div class="col-md-3">
+                <div><span>Keyword</span></div>
+                <input class="form-control" type="text" data-bind="value:keyword, valueUpdate:'keyup'"/>
+            </div>
+        </div>
+        <div class="well">
+            <div data-bind="if:isMovie">
+                <div data-bind="if:movies().length>0">
+                    <div class="row" data-bind="foreach:movies">
+                        <div class="col-md-6">
+
+                            <div class="thumbnail" style="height:640px">
+                                <img data-bind="attr:{src:$parent.constructImageUrl($data),alt:original_title}" />
+                                <br />
+                                <div class="caption">
+                                    <div>
+                                        <a class="" data-bind="text:title, click:$parent.redirectToMovieDetails" href="#"></a>
+                                        <p class="pull-right">
+                                            <span class="" data-bind="text:vote_average"></span>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </p>
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span data-bind="text:release_date"></span>
+                                        <span class="pull-right" data-bind="text:$parent.getGenres(genre_ids)"></span>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <span data-bind="text:getPageDetails()"></span>
+                        <div class="pull-right">
+                            <a data-bind="if: page()>1, click:goToPreviousPage" href="#">
+                                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                            </a>
+                            <a data-bind="if:page()<=totalPages(), click:goToNextPage" href="#">
+                                <i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div data-bind="if:movies().length==0">
+                    <h2>No records found</h2>
+                </div>
+            </div>
+            <div data-bind="if:isTvShow">
+                <h2>No records found</h2>
+            </div>
+        </div>
+
+        
+    </div>
+</body>
+</html>

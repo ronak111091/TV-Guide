@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+    <link href="../css/project2.css" rel="stylesheet" />
+
+    <script src="../../Scripts/jquery-3.1.1.js"></script>
+    <script src="../../Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    
+    <script src="../js/namespace.js"></script>
+    <script src="../js/dataService.js"></script>
+    <script src="../js/movies.js"></script>
+</head>
+<body>
+    <!--<div class="container">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="home.html">Home</a></li>
+            <li role="presentation"><a href="discover.html">Discover</a></li>
+            <li role="presentation" class="active disabled"><a href="#">Movies</a></li>
+            <li role="presentation"><a href="tvShows.html">TV Shows</a></li>
+        </ul>
+    </div>-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="home.html">
+                    <i class="fa fa-television" aria-hidden="true"></i>&nbsp;<strong>TV</strong> Guide
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li role="presentation"><a href="discover.html">Discover</a></li>
+                    <li role="presentation" class="active"><a href="movies.html">Movies</a></li>
+                    <li role="presentation"><a href="tvShows.html">TV Shows</a></li>
+                </ul>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <!--<div id="moviesTabs">
+                <ul>
+                    <li><a href="#popularTab" data-bind="click:loadPopularMovies">Popular</a></li>
+                    <li><a href="#topRatedTab" data-bind="click:loadTopRatedMovies">Top Rated</a></li>
+                    <li><a href="#upcomingTab">Upcoming</a></li>
+                    <li><a href="#nowPlayingTab">Now Playing</a></li>
+                </ul>
+                <div id="popularTab">
+                    Popular
+                </div>
+                <div id="topRatedTab">
+                    Top Rated
+                </div>
+                <div id="upcomingTab">
+                    Upcoming
+                </div>
+                <div id="nowPlayingTab">
+                    Now Playing
+                </div>
+            </div>-->
+            <p>Select Category</p>
+            <select class="form-control" data-bind="options:categories, value:selectedCategory, optionsText:'name',optionsValue:'key'"></select>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 id="title" data-bind="text:movieListTitle"></h2>
+            </div>
+        </div>
+        <div class="row well">
+            <div data-bind="foreach:movieList">
+
+                <div class="col-md-6">
+                    <div class="thumbnail" style="height:680">
+                        <img data-bind="attr:{src:$parent.constructImageUrl($data),alt:original_title}" />
+                        <br />
+                        <div class="caption">
+                            <div>
+                                <a class="" data-bind="text:title, click:$parent.redirectToMovieDetails" href="#"></a>
+                                <p class="pull-right">
+                                    <span class="" data-bind="text:vote_average"></span>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </p>
+                            </div>
+                            <br />
+                            <div>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <span data-bind="text:release_date"></span>
+                                <span class="pull-right" data-bind="text:$parent.getGenres(genre_ids)"></span>
+                            </div>
+                            <br />
+                            <p data-bind="text:overview" class="truncate"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <span data-bind="text:getPageDetails()"></span>
+            <div class="pull-right">
+                <a data-bind="if: pageNo()>1, click:goToPreviousPage" href="#">
+                    <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                </a>
+                <a data-bind="if:pageNo()<=totalPages(), click:goToNextPage" href="#">
+                    <i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+                </a>
+            </div>
+           
+        </div>
+        <br/><br /><br />
+    </div>
+</body>
+</html>
