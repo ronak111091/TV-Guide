@@ -18,5 +18,5 @@ Knockout.js provides:
 
 I have also used the revealing module design pattern to better structure the code. check discover.js and movies.js
 	
--future work
-I intend to continue working on the app as a side project and finish the TV show features and may be add new functionalities like search  actors.
+-Future work:
+I intend to continue working on the app and finish the TV show functionalities
