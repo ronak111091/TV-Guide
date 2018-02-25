@@ -150,7 +150,7 @@ my.data = {
           value:"Popularity Ascending"
       },
       {
-          key: "popularity.dsc",
+          key: "popularity.desc",
           value: "Popularity Descending"
       },
       {
@@ -158,7 +158,7 @@ my.data = {
           value: "Release Date Ascending"
       },
       {
-          key: "release_date.dsc",
+          key: "release_date.desc",
           value: "Release Date Descending"
       },
       {
@@ -166,7 +166,7 @@ my.data = {
           value: "Rating Ascending"
       },
       {
-          key: "vote_average.dsc",
+          key: "vote_average.desc",
           value: "Rating Descending"
       },
       {
@@ -174,7 +174,7 @@ my.data = {
           value: "Title [A-Z]"
       },
       {
-          key: "original_title.dsc",
+          key: "original_title.desc",
           value: "Title [Z-A]"
       }
   ]

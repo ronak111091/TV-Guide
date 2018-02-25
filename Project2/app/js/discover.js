@@ -43,7 +43,7 @@ $(function () {
 
         var reset = function () {
             page(1);
-            sortBy("popularity.dsc");
+            sortBy("popularity.desc");
             genres([]);
             keyword("");
             isMovie(true);
@@ -54,7 +54,7 @@ $(function () {
 
         var resetFilters = function(){
             page(1);
-            //sortBy("popularity.dsc");
+            //sortBy("popularity.desc");
             //genres([]);
             //keyword("");
             //year(null);

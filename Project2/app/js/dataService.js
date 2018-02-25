@@ -135,25 +135,30 @@ var dataService = (function () {
 
     var disvoverMovies = function (params) {
         console.log(params);
-        var url = "/discover/movie?" + apiKeyValue + "&language=en-US&include_adult=false&include_video=false&page="
-            + params.page
-        if (params.sortBy) {
-            url = url + "&sort_by=" + params.sortBy;
-        }
-        if(params.year){
-            url = url + "&year=" + params.year;
-        }
-        if (params.genres) {
-            url = url + "&with_genres=" + params.genres;
-        }
+        var url = null;
         if (params.keywords) {
-            url = url + "&with_keywords=" + params.keywords;
+            url = "/search/movie?" + apiKeyValue + "&language=en-US&include_adult=false&page=" + params.page + "&query=" + params.keywords;
+        } else {
+            url = "/discover/movie?" + apiKeyValue + "&language=en-US&include_adult=false&include_video=false&page="
+            + params.page;
+
+            if (params.sortBy) {
+                url = url + "&sort_by=" + params.sortBy;
+            }
+            if (params.year) {
+                url = url + "&primary_release_year=" + params.year;
+            }
+            if (params.genres) {
+                url = url + "&with_genres=" + params.genres;
+            }
+            //if (params.keywords) {
+            //    url = url + "&with_keywords=" + params.keywords;
+            //}
+            
         }
         url = mainUrl + url;
         console.log(url);
-
-        return $.getJSON(url);
-        
+        return $.getJSON(url);        
     }
 
     return {
