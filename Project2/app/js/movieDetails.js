@@ -95,7 +95,9 @@ $(function () {
                             close:function (event) {
                                 console.log("stoping video!");
                                 $("#trailerFrame").attr("src","");
-                            }
+                            },
+                            width:550,
+                            modal:true
                         });
                     }
 
